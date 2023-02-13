@@ -8,20 +8,20 @@ import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.contestapiintegration.R
 import com.example.contestapiintegration.SharedViewModel
 import com.example.contestapiintegration.databinding.FragmentDetailBinding
 
-class Detail : Fragment() {
+class DetailFragment : Fragment() {
 
-    private lateinit var binding : FragmentDetailBinding
-    lateinit var sharedViewModel : SharedViewModel
+    private var _binding: FragmentDetailBinding? = null
+    private val binding get() = _binding!!
+    lateinit var sharedViewModel: SharedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDetailBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
 
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
@@ -34,6 +34,11 @@ class Detail : Fragment() {
             }
         })
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

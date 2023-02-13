@@ -16,38 +16,46 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class Home : Fragment(), ContestAdapter.ContestInterface {
+class HomeFragment : Fragment(), ContestAdapter.ContestInterface {
 
-    private lateinit var binding : FragmentHomeBinding
-    lateinit var sharedViewModel : SharedViewModel
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+    lateinit var sharedViewModel: SharedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         val contest = ContestService.apiInterface
-
         GlobalScope.launch(Dispatchers.Main) {
             val result = contest.getContest()
-            if(result!=null){
-                val contestAdapter = ContestAdapter(requireContext(), result.body() as ArrayList<ContestDataItem>, this@Home)
+            try {
+                val contestAdapter = ContestAdapter(
+                    requireContext(),
+                    result.body() as ArrayList<ContestDataItem>,
+                    this@HomeFragment
+                )
                 binding.recyclerView.adapter = contestAdapter
                 binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
                 Log.d("TAG", result.body().toString())
+            } catch (e: Exception) {
+                Log.d("TAG", "Error in Fetching Data", e)
             }
-
         }
         return binding.root
     }
 
     override fun onDetailClicked(contests: ContestDataItem) {
-
-        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         sharedViewModel.getUrl(contests.url)
+        findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
+    }
 
-        findNavController().navigate(R.id.action_home2_to_detail)
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

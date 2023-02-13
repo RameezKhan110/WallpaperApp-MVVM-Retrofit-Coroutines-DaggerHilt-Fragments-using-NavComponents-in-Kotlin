@@ -6,12 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contestapiintegration.databinding.ContestItemBinding
 
-class ContestAdapter(val context: Context, val contests : ArrayList<ContestDataItem>, val listener : ContestInterface) :
+class ContestAdapter(
+    val context: Context,
+    val contests: ArrayList<ContestDataItem>,
+    val listener: ContestInterface
+) :
     RecyclerView.Adapter<ContestAdapter.ContestViewHolder>() {
 
-    lateinit var binding : ContestItemBinding
+    lateinit var binding: ContestItemBinding
 
-    class ContestViewHolder(binding: ContestItemBinding) : RecyclerView.ViewHolder(binding.root){
+    class ContestViewHolder(binding: ContestItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
 
@@ -27,7 +31,7 @@ class ContestAdapter(val context: Context, val contests : ArrayList<ContestDataI
         binding.endTime.text = allContest.end_time
 
 
-        binding.Item.setOnClickListener{
+        binding.Item.setOnClickListener {
             listener.onDetailClicked(contests[position])
         }
     }
@@ -36,7 +40,7 @@ class ContestAdapter(val context: Context, val contests : ArrayList<ContestDataI
         return contests.size
     }
 
-    interface ContestInterface{
+    interface ContestInterface {
         fun onDetailClicked(contests: ContestDataItem)
     }
 }
