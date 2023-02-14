@@ -16,7 +16,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class HomeFragment : Fragment(), ContestAdapter.ContestInterface {
+class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -35,9 +35,10 @@ class HomeFragment : Fragment(), ContestAdapter.ContestInterface {
             try {
                 val contestAdapter = ContestAdapter(
                     requireContext(),
-                    result.body() as ArrayList<ContestDataItem>,
-                    this@HomeFragment
-                )
+                    result.body() as ArrayList<ContestDataItem>) { url ->
+                    sharedViewModel.getUrl(url)
+                    findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
+                }
                 binding.recyclerView.adapter = contestAdapter
                 binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
                 Log.d("TAG", result.body().toString())
@@ -46,11 +47,6 @@ class HomeFragment : Fragment(), ContestAdapter.ContestInterface {
             }
         }
         return binding.root
-    }
-
-    override fun onDetailClicked(contests: ContestDataItem) {
-        sharedViewModel.getUrl(contests.url)
-        findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
     }
 
     override fun onDestroy() {

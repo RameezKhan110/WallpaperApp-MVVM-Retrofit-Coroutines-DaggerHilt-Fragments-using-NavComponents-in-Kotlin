@@ -9,7 +9,7 @@ import com.example.contestapiintegration.databinding.ContestItemBinding
 class ContestAdapter(
     val context: Context,
     val contests: ArrayList<ContestDataItem>,
-    val listener: ContestInterface
+    private val onClickListener: (String) -> Unit
 ) :
     RecyclerView.Adapter<ContestAdapter.ContestViewHolder>() {
 
@@ -30,17 +30,12 @@ class ContestAdapter(
         binding.startTime.text = allContest.start_time
         binding.endTime.text = allContest.end_time
 
-
         binding.Item.setOnClickListener {
-            listener.onDetailClicked(contests[position])
+            onClickListener(allContest.url)
         }
     }
 
     override fun getItemCount(): Int {
         return contests.size
-    }
-
-    interface ContestInterface {
-        fun onDetailClicked(contests: ContestDataItem)
     }
 }
