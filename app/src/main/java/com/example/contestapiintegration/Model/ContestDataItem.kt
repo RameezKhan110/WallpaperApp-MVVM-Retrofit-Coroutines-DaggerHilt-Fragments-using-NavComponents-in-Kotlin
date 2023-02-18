@@ -1,4 +1,4 @@
-package com.example.contestapiintegration
+package com.example.contestapiintegration.Model
 
 data class ContestDataItem(
     val duration: String,

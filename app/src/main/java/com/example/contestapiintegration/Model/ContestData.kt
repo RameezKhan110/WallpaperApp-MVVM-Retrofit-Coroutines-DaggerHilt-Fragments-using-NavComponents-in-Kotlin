@@ -1,3 +1,3 @@
-package com.example.contestapiintegration
+package com.example.contestapiintegration.Model
 
 class ContestData : ArrayList<ContestDataItem>()

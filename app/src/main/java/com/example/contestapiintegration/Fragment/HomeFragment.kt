@@ -1,4 +1,4 @@
-package com.example.contestapiintegration.Fragments
+package com.example.contestapiintegration.Fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -11,13 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contestapiintegration.*
+import com.example.contestapiintegration.Model.ContestDataItem
 import com.example.contestapiintegration.Repository.ContestRepository
 import com.example.contestapiintegration.ViewModel.ContestViewModel
 import com.example.contestapiintegration.ViewModel.ContestViewModelFactory
+import com.example.contestapiintegration.ViewModel.SharedViewModel
 import com.example.contestapiintegration.databinding.FragmentHomeBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
@@ -43,12 +42,11 @@ class HomeFragment : Fragment() {
 
         contestViewModel.getAllContest()
         contestViewModel.contestList.observe(viewLifecycleOwner, Observer {
-            val contestAdapter = ContestAdapter(
-                requireContext(), it as ArrayList<ContestDataItem>
-            ) { url ->
+            val contestAdapter = ContestAdapter() { url ->
                 sharedViewModel.getUrl(url)
                 findNavController().navigate(R.id.action_homeFragment_to_detailFragment)
             }
+            contestAdapter.submitList(it as ArrayList<ContestDataItem>)
             binding.recyclerView.adapter = contestAdapter
             binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
             Log.d("TAG", it.toString())

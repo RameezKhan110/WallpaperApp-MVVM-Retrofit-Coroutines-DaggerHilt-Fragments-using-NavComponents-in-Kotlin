@@ -1,4 +1,4 @@
-package com.example.contestapiintegration.Fragments
+package com.example.contestapiintegration.Fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.contestapiintegration.SharedViewModel
+import com.example.contestapiintegration.ViewModel.SharedViewModel
 import com.example.contestapiintegration.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {

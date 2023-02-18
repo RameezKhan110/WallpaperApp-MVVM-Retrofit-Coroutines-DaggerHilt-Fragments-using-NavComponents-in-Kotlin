@@ -1,4 +1,4 @@
-package com.example.contestapiintegration
+package com.example.contestapiintegration.ViewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
