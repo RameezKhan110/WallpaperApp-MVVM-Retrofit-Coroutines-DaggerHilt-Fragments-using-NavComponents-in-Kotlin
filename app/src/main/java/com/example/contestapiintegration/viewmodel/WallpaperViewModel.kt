@@ -22,12 +22,6 @@ class WallpaperViewModel @Inject constructor(
 
     val wallpaperList: MutableLiveData<WallpaperArticle> = MutableLiveData()
     val liveWallpaperList: LiveData<WallpaperArticle> = wallpaperList
-    val mutablePageUrl: MutableLiveData<String> = MutableLiveData()
-    val livePageUrl: LiveData<String> = mutablePageUrl
-
-    fun getPageUrl(pageUrl: String) {
-        mutablePageUrl.value = pageUrl
-    }
 
     fun getWallpapers() {
         viewModelScope.launch() {

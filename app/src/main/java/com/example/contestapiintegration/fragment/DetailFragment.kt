@@ -8,23 +8,30 @@ import android.view.ViewGroup
 import android.webkit.WebViewClient
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.contestapiintegration.R
 import com.example.contestapiintegration.databinding.FragmentDetailBinding
+import com.example.contestapiintegration.viewmodel.SharedViewModel
+
 import com.example.contestapiintegration.viewmodel.WallpaperViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 class DetailFragment : Fragment() {
 
     lateinit var binding: FragmentDetailBinding
-    val wallpaperViewModel: WallpaperViewModel by viewModels()
+    lateinit var sharedViewModel: SharedViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDetailBinding.inflate(inflater, container, false)
 
-        wallpaperViewModel.livePageUrl.observe(viewLifecycleOwner, Observer { pageUrl ->
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+
+        sharedViewModel.livePageUrl.observe(viewLifecycleOwner, Observer {
             binding.detailFragmentWebView.apply {
-                loadUrl(pageUrl)
+                loadUrl(it)
                 webViewClient = WebViewClient()
                 settings.javaScriptEnabled = true
             }
@@ -33,8 +40,8 @@ class DetailFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        binding == null
         super.onDestroy()
+        binding == null
     }
 
 }
