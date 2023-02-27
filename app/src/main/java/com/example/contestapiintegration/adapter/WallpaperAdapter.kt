@@ -25,8 +25,10 @@ class WallpaperAdapter(
     override fun onBindViewHolder(holder: WallpaperViewHolder, position: Int) {
         val allWallpapers = getItem(position)
         WallpaperItemBinding.bind(holder.itemView).apply() {
-
             Glide.with(holder.itemView).load(allWallpapers.largeImageURL).into(wallpaper)
+            wallpaperLikes.text = allWallpapers.likes.toString()
+            wallpaperComments.text = allWallpapers.comments.toString()
+            wallpaperViews.text = allWallpapers.views.toString()
             wallpaperItem.setOnClickListener {
                 onDetailClicked(allWallpapers.pageURL)
             }
