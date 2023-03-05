@@ -1,4 +1,4 @@
-package com.example.contestapiintegration.adapter
+package com.example.contestapiintegration.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.contestapiintegration.databinding.WallpaperItemBinding
-import com.example.contestapiintegration.model.Hit
-import com.example.contestapiintegration.model.WallpaperArticle
+import com.example.contestapiintegration.data.model.Hit
+import com.example.contestapiintegration.data.model.WallpaperArticle
 
 class WallpaperAdapter(
     private val onDetailClicked: (String) -> Unit

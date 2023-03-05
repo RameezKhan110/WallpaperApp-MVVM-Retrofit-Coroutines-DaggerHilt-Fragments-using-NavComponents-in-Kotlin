@@ -1,6 +1,6 @@
 package com.example.contestapiintegration.di
 
-import com.example.contestapiintegration.api.WallpaperApiService
+import com.example.contestapiintegration.data.api.WallpaperApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

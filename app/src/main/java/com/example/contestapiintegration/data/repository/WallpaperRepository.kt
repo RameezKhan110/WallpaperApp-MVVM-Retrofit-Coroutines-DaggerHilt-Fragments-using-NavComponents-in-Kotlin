@@ -1,8 +1,8 @@
-package com.example.contestapiintegration.repository
+package com.example.contestapiintegration.data.repository
 
 
-import com.example.contestapiintegration.api.WallpaperApiService
-import com.example.contestapiintegration.model.WallpaperArticle
+import com.example.contestapiintegration.data.api.WallpaperApiService
+import com.example.contestapiintegration.data.model.WallpaperArticle
 import retrofit2.Response
 import javax.inject.Inject
 
