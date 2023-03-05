@@ -29,6 +29,8 @@ class DetailFragment : Fragment() {
     ): View? {
         binding = FragmentDetailBinding.inflate(inflater, container, false)
 
+        activity?.title = "Wallpaper Page"
+
         sharedViewModel.livePageUrl.observe(viewLifecycleOwner, Observer {
             binding.detailFragmentWebView.apply {
                 loadUrl(it)

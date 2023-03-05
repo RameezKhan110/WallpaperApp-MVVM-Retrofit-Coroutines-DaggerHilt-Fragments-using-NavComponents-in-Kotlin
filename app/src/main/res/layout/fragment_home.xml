@@ -16,6 +16,6 @@
         android:layout_width="match_parent"
         android:id="@+id/WallpaperRecyclerView"
         android:visibility="gone"
-        tools:listitem="@layout/wallpaper_item"
+        tools:listitem="@layout/wallpaper_sample"
         android:layout_height="match_parent" />
 </FrameLayout>

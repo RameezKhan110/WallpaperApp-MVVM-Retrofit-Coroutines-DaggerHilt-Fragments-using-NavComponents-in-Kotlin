@@ -9,22 +9,23 @@ import com.bumptech.glide.Glide
 import com.example.contestapiintegration.databinding.WallpaperItemBinding
 import com.example.contestapiintegration.data.model.Hit
 import com.example.contestapiintegration.data.model.WallpaperArticle
+import com.example.contestapiintegration.databinding.WallpaperSampleBinding
 
 class WallpaperAdapter(
     private val onDetailClicked: (String) -> Unit
 ) :
     ListAdapter<Hit, WallpaperAdapter.WallpaperViewHolder>(DiffUtil()) {
 
-    class WallpaperViewHolder(binding: WallpaperItemBinding) : RecyclerView.ViewHolder(binding.root)
+    class WallpaperViewHolder(binding: WallpaperSampleBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WallpaperViewHolder {
-        val view = WallpaperItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val view = WallpaperSampleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return WallpaperViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: WallpaperViewHolder, position: Int) {
         val allWallpapers = getItem(position)
-        WallpaperItemBinding.bind(holder.itemView).apply() {
+        WallpaperSampleBinding.bind(holder.itemView).apply() {
             Glide.with(holder.itemView).load(allWallpapers.largeImageURL).into(wallpaper)
             wallpaperLikes.text = allWallpapers.likes.toString()
             wallpaperComments.text = allWallpapers.comments.toString()

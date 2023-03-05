@@ -32,6 +32,8 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        activity?.title = "Wallpapers"
+
         wallpaperViewModel.getWallpapers()
         val wallpaperAdapter = WallpaperAdapter() { pageUrl ->
             sharedViewModel.getPageUrl(pageUrl)
