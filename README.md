@@ -1,0 +1,1 @@
+It is a simple wallpaper application using the PixaBay API. It is a two screen application, on first screen all wallpapers will be displayed and on the second one the page url of the same wallpaper will be displayed 
